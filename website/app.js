@@ -34,27 +34,25 @@ const getEntryData = async ()=> {
 }
 
 // display entries
-function updateEntries(entry){
+function updateUI(entry){
 	const entriesDiv = document.querySelector('.entries');
 
-		const entryHolderDiv = document.createElement('div');
-		entryHolderDiv.classList = "entryHolder" ;
-		entryHolderDiv.innerHTML= `
-		<div class="row align-items-center justify-content-center">
-		    <div id = "date" class="col-3 text-center">
-		    	<h5>${entry.date.split('.', 1)}</h4>
-		    	<h6>${entry.date.split('.', 3)[1]+'.'+entry.date.split('.', 3)[2]}</h6>
-		    </div> 
-		    <div class="col-9 p-2">
-			    <div class="card mb-3" >
-	    			<div id = "temp" class="card-header">${entry.tempreture + ' °F'}</div>
-	    			<div id = "content" class="card-text p-3">${entry.feelings}</div>
-	    		</div>
-	    	</div>
-    	</div>`
+	const entryHolderDiv = document.createElement('div');
+	entryHolderDiv.classList = "entryHolder row align-items-center justify-content-center px-2 pt-2" ;
+	entryHolderDiv.innerHTML= `
+    <div id = "date" class="col-3 text-center">
+    	<h5>${entry.date.split('.', 1)}</h4>
+    	<h6>${entry.date.split('.', 3)[1]+'.'+entry.date.split('.', 3)[2]}</h6>
+    </div> 
+    <div class="col-9 p-2">
+	    <div class="card mb-3" >
+			<div id = "temp" class="card-header">${entry.tempreture + ' °F'}</div>
+			<div id = "content" class="card-text p-3">${entry.feelings}</div>
+		</div>
+	</div>`
+	entriesDiv.appendChild(entryHolderDiv);
 
-    	entriesDiv.appendChild(entryHolderDiv);
-    	document.querySelector(".wrapper").reset();
+	document.querySelector(".wrapper").reset();
 }
 
 //Error Handling
@@ -86,7 +84,7 @@ async function postEntry(url='', data={}){
 	}
 
 	//add entry to UI
-	updateEntries(data);
+	//updateEntries(data);
 }
 
 
@@ -100,18 +98,23 @@ async function getEntries(url=''){
 		throw new Error;
 	}
 
-	entries.forEach(entry=>{
-		updateEntries(entry);
-	});
+	return entries;
+	// entries.forEach(entry=>{
+	// 	updateEntries(entry);
+	// });
 }
 
 
 /* execution starts here */
 // Event listener to add function to existing HTML DOM element
 document.addEventListener('DOMContentLoaded', async ()=>{
-	//Onload output saved entries to UI
+	
 	try {
-		await getEntries('/all');
+		//Onload output saved endpoint data entries to UI
+		const serverRecords = await getEntries('/all');
+		serverRecords.forEach(record =>{
+			updateUI(record);
+		})
 	} catch (err){
 		handleError(err);
 	}
@@ -122,8 +125,14 @@ document.addEventListener('DOMContentLoaded', async ()=>{
 	generateBtn.addEventListener('click', async ()=>{
 
 		try {
-			const data = await getEntryData();
-			await postEntry('/add', data);
+			//1. accept user entry
+			const userData = await getEntryData();
+			//2. add it to endpoint records
+			await postEntry('/add', userData);
+			//3. retrive all endpoint records
+			const serverRecords = await getEntries('/all');
+			//4. update UI by adding last added record  
+			updateUI(serverRecords[serverRecords.length-1]);
 
 		} catch (err){
 			handleError(err);

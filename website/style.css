@@ -60,6 +60,13 @@ html, body{
     border-color: transparent;
 }
 
+.entries > :first-child { margin-bottom: auto }
+
+.entryHolder{
+    padding-top: 1em;
+}
+
+
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label{
     display: block;
