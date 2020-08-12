@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Weather Journal</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- fontawesome script -->
+    <script src="https://kit.fontawesome.com/d9c9664b69.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid h-100">
+
+      <header class ="holder headline">
+        <i class="fas fa-cloud fa-2x"></i>
+        <br>
+        <span>Weather Journal App</span>
+      </header>
+
+      <div class="container">
+        <div class="row p-3 h-100">
+
+          <div class="enter col-lg-6 col-ms-12 text-center p-3">
+            <form class="wrapper">
+              <div class ="holder zip pb-2">
+                <label for="zip">Enter Zipcode here</label>
+                <input class="form-control" type="text" id="zip" placeholder="enter zip code here" cols="60" >
+              </div>
+              <div class ="holder feel pb-2">
+                <label for="feelings">How are you feeling today?</label>
+                <textarea class= "myInput form-control" id="feelings" placeholder="Enter your feelings here" rows="9" cols="60"></textarea>
+              </div>
+              <button id="generate" type="button" class="btn btn-dark btn-lg btn-block mb-2 mt-2"> Generate </button>
+            </form>
+          </div>
+          
+          <div class ="entries col-lg-6 col-ms-12 d-flex flex-column-reverse justify-content-end">
+            <!-- append children from js -->
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="row d-flex  p-1 d-flex align-items-center">
+          <div class="copyrigh col-md-6 col-lg-5 text-center text-md-left mb-1 mb-md-0">
+            <span>Weather Journal &copy; 2020</span>
+          </div>
+          <div class="social-buttons col-md-6 col-lg-7 text-center text-md-right">
+            <i><a class="fab fa-twitter-square mr-4 fa-2x" target="_blank" title="Twitter" href=""></a></i>
+            <i><a class="fab fa-github mr-4 fa-2x" target="_blank" title="GitHub" href=""></a></i>
+          </div>
+        </div>
+      </footer> 
+    </div>
+
+    
+
+    <script src="app.js" type="text/javascript"></script>
+  </body>
+</html>
