@@ -24,5 +24,5 @@ This project is an asynchronous web app that fetches the weather from OpenWeathe
 
 1. Clone the repo or download the files.
 2. Install Node.js on your local machine.
-2. Run the command in the root node server.js.
-3. The server should start on http://localhost:3000.
+3. Run the command in the root node server.js.
+4. The server should start on http://localhost:3000.
